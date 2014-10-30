@@ -216,6 +216,19 @@ class GalleryController extends Controller {
 
 	public function swapPictures($slug, GalleryRepository $repo)
 	{
+
+		$id1 = \Request::get('id1');
+		$id2 = \Request::get('id2');
+
+		$first = $repo->picture($id1);
+		$second = $repo->picture($id2);
+
+		$first->moveAfter($second);
+
+		\Flash::success('Sorted.');
+
+		return \Redirect::back();
+
 		
 	}
 
