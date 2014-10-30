@@ -30,7 +30,7 @@
 					<td>{{ $album->id }}</td>
 					<td>{{ $album->name }}</td>
 					<td>
-						<a href="{{ url('admin/gallery/' . $album->id . '/edit') }}" class="btn btn-sm btn-primary">edit</a>
+						<a href="{{ url('admin/gallery/' . $album->slug . '/edit') }}" class="btn btn-sm btn-primary">edit</a>
 					</td>
 					<td>
 						<a href="{{ url('admin/gallery/' . $album->id . '/delete') }}" class="btn btn-sm btn-danger">delete</a>
