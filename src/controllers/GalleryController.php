@@ -205,6 +205,8 @@ class GalleryController extends Controller {
 	public function deletePicture($slug, GalleryRepository $repo)
 	{
 
+		$id = \Request::get('picture_id');
+
 		$picture = $repo->picture($id);
 		$picture->delete();
 
