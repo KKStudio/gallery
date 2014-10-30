@@ -33,7 +33,12 @@ class GalleryServiceProvider extends ServiceProvider {
 			\Route::get('gallery/{id}/delete', '\Kkstudio\Gallery\Controllers\GalleryController@delete');
 			\Route::post('gallery/{id}/delete', '\Kkstudio\Gallery\Controllers\GalleryController@postDelete');
 			
-			\Route::post('gallery/swap', '\Kkstudio\Gallery\Controllers\GalleryController@swap');
+			\Route::post('gallery/swap', '\Kkstudio\Gallery\Controllers\GalleryController@swap');			
+
+			\Route::get('gallery/{slug}/pictures', '\Kkstudio\Gallery\Controllers\GalleryController@pictures');
+			\Route::post('gallery/{slug}/pictures', '\Kkstudio\Gallery\Controllers\GalleryController@addPicture');
+			\Route::post('gallery/{slug}/pictures/delete', '\Kkstudio\Gallery\Controllers\GalleryController@deletePicture');
+			\Route::post('gallery/{slug}/pictures/swap', '\Kkstudio\Gallery\Controllers\GalleryController@swapPictures');
 
 		});
 	}

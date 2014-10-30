@@ -21,6 +21,7 @@
 				<th>Name</th>
 				<th></th>
 				<th></th>
+				<th></th>
 				<th>up</th>
 				<th>down</th>
 			</thead>
@@ -29,6 +30,9 @@
 				<tr>
 					<td>{{ $album->id }}</td>
 					<td>{{ $album->name }}</td>
+					<td>
+						<a href="{{ url('admin/gallery/' . $album->slug . '/pictures') }}" class="btn btn-sm btn-warning">Pictures</a>
+					</td>
 					<td>
 						<a href="{{ url('admin/gallery/' . $album->slug . '/edit') }}" class="btn btn-sm btn-primary">edit</a>
 					</td>

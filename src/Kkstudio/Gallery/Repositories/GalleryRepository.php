@@ -73,4 +73,15 @@ class GalleryRepository {
 		]);
 	}
 
+	public function addImage($album_id, $image_name, $lp)
+	{
+		return Picture::create([
+
+			'album_id' => $album_id,
+			'image' => $image_name,
+			'position' => $lp
+
+		]);
+	}
+
 }

@@ -163,4 +163,53 @@ class GalleryController extends Controller {
 
 	}
 
+	public function pictures($slug, GalleryRepository $repo)
+	{
+
+		$album = $repo->album($slug);
+
+		return \View::make('gallery::pictures')->with('album', $album);
+		
+	}
+
+	public function addPicture($slug, GalleryRepository $repo)
+	{
+
+		$album = $repo->album($slug);
+
+		$files = Input::file('images');
+
+	    foreach($files as $file) {
+
+	    	$image_name = \Str::random(32) . \Str::random(32) . '.png';
+			$image = \Image::make($file->getRealPath());
+
+            $image->save(public_path('assets/gallery/' . $image_name));
+
+            $callback = function ($constraint) { $constraint->upsize(); };
+			$image->widen(320, $callback)->heighten(180, $callback);
+
+            $image->save(public_path('assets/gallery/thumb_' . $image_name));
+
+            $lp = $repo->pictureMax($album->id) + 1;
+            $repo->addImage($album->id, $image_name, $lp);
+
+	    }
+
+		\Flash::success('Images added.');
+
+		return \Redirect::back();
+		
+	}
+
+	public function deletePicture($slug, GalleryRepository $repo)
+	{
+		
+	}
+
+	public function swapPictures($slug, GalleryRepository $repo)
+	{
+		
+	}
+
 }
