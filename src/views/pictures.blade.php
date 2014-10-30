@@ -4,6 +4,8 @@
 
 	<h3 class="pull-left">Pictures</h3>
 
+	<div class="clearfix"></div><br>
+
 	<h4>{{ $album->name }}</h4>
 
 	<hr>
@@ -39,15 +41,53 @@
 
 	<div class="row">
 
+	@if(count($album->pictures))
+
 	@foreach($album->pictures as $k => $picture)
 
-		<div class="col-xs-6 col-sm-4 col-md-3">
+		<div class="col-xs-10 col-sm-4 col-md-3">
 
-			<img src="{{ $picture->getThumb() }}" class="img-thumbnail">
+			<img src="{{ $picture->getThumb() }}" class="img-thumbnail" style="max-width: 320px; max-height: 180px;">
+
+			{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/pictures/delete' ]) !!}
+
+				{!! Form::hidden('picture_id', $picture->id) !!}
+
+				{!! Form::submit('delete', [ 'class' => 'btn btn-sm btn-danger']) !!}
+
+			{!! Form::close() !!}
+
+			@if($k-1 >= 0)
+				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/swap']) !!}
+
+					{!! Form::hidden('id1', $album->pictures[$k-1]->id) !!}
+					{!! Form::hidden('id2', $picture->id) !!}
+
+					{!! Form::submit('move up', [ 'class' => 'btn-sm btn btn-success']) !!}
+
+				{!! Form::close() !!}
+				@endif
+
+				@if($k+1 < count($album->pictures))
+				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/swap']) !!}
+
+					{!! Form::hidden('id1', $picture->id) !!}
+					{!! Form::hidden('id2', $album->pictures[$k+1]->id) !!}
+
+					{!! Form::submit('move down', [ 'class' => 'btn-sm btn btn-success']) !!}
+
+				{!! Form::close() !!}
+				@endif
 
 		</div>
 
 	@endforeach
+
+	@else 
+
+		<p class="text-muted">No images in this album.</p>
+
+	@endif
 
 	</div>
 

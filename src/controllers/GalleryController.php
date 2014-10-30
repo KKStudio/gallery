@@ -204,6 +204,13 @@ class GalleryController extends Controller {
 
 	public function deletePicture($slug, GalleryRepository $repo)
 	{
+
+		$picture = $repo->picture($id);
+		$picture->delete();
+
+		\Flash::success('Image removed.');
+
+		return \Redirect::back();
 		
 	}
 
