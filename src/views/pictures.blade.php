@@ -45,9 +45,11 @@
 
 	@foreach($album->pictures as $k => $picture)
 
-		<div class="col-xs-10 col-sm-4 col-md-3">
+		<div class="">
 
-			<img src="{{ $picture->getThumb() }}" class="img-thumbnail" style="max-width: 320px; max-height: 180px;">
+			<img src="{{ $picture->getThumb() }}" class="img-thumbnail pull-left" style="max-width: 320px; max-height: 180px;">
+
+			<div class="controls pull-left"> 
 
 			{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/pictures/delete' ]) !!}
 
@@ -56,6 +58,8 @@
 				{!! Form::submit('delete', [ 'class' => 'btn btn-sm btn-danger']) !!}
 
 			{!! Form::close() !!}
+
+			<br><br>
 
 			@if($k-1 >= 0)
 				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/pictures/swap']) !!}
@@ -66,6 +70,8 @@
 					{!! Form::submit('move up', [ 'class' => 'btn-sm btn btn-success']) !!}
 
 				{!! Form::close() !!}
+
+			<br><br>
 				@endif
 
 				@if($k+1 < count($album->pictures))
@@ -79,7 +85,12 @@
 				{!! Form::close() !!}
 				@endif
 
+
+				</div>
+
 		</div>
+
+		<div class="clearfix"></div>
 
 	@endforeach
 
