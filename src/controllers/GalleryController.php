@@ -177,7 +177,7 @@ class GalleryController extends Controller {
 
 		$album = $repo->album($slug);
 
-		$files = Input::file('images');
+		$files = \Input::file('images');
 
 	    foreach($files as $file) {
 
