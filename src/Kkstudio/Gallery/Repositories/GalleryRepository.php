@@ -24,7 +24,7 @@ class GalleryRepository {
 
 			$query->orderBy('position');
 
-		})])->first();
+		}])->first();
 
 	}
 
