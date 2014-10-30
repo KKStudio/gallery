@@ -16,6 +16,7 @@ class KkstudioCreateAlbumsTable extends Migration {
 
 			$table->increments('id');
 			$table->string('name');
+			$table->string('slug');
 			$table->text('description');
 			$table->string('image');
 			$table->integer('position');
