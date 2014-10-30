@@ -59,7 +59,6 @@
 
 			{!! Form::close() !!}
 
-			<br><br>
 
 			@if($k-1 >= 0)
 				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/pictures/swap']) !!}
@@ -71,7 +70,6 @@
 
 				{!! Form::close() !!}
 
-			<br><br>
 				@endif
 
 				@if($k+1 < count($album->pictures))
