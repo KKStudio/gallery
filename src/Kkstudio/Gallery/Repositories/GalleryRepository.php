@@ -53,7 +53,7 @@ class GalleryRepository {
 
 		$position = 0;
 
-		$max = Picute::where('album_id', $album_id)->orderBy('position', 'desc')->first();
+		$max = Picture::where('album_id', $album_id)->orderBy('position', 'desc')->first();
 		if($max) $position = $max->position;
 
 		return $position;
