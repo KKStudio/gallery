@@ -48,7 +48,7 @@
 						@endif
 					</td>
 					<td>
-						@if($k+1 < count($menu))
+						@if($k+1 < count($albums))
 						{!! Form::open(['url' => 'admin/gallery/swap']) !!}
 
 							{!! Form::hidden('id1', $album->id) !!}
