@@ -58,7 +58,7 @@
 			{!! Form::close() !!}
 
 			@if($k-1 >= 0)
-				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/swap']) !!}
+				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/pictures/swap']) !!}
 
 					{!! Form::hidden('id1', $album->pictures[$k-1]->id) !!}
 					{!! Form::hidden('id2', $picture->id) !!}
@@ -69,7 +69,7 @@
 				@endif
 
 				@if($k+1 < count($album->pictures))
-				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/swap']) !!}
+				{!! Form::open(['url' => 'admin/gallery/' . $album->slug . '/pictures/swap']) !!}
 
 					{!! Form::hidden('id1', $picture->id) !!}
 					{!! Form::hidden('id2', $album->pictures[$k+1]->id) !!}
