@@ -20,7 +20,11 @@ class GalleryRepository {
 	public function album($slug) 
 	{
 
-		return Album::where('slug', $slug)->with('pictures')->first();
+		return Album::where('slug', $slug)->with(['pictures' => function($query) {
+
+			$query->orderBy('position');
+
+		})])->first();
 
 	}
 
