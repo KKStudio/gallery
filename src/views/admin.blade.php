@@ -6,9 +6,19 @@
 
 	<div class=""> 
 
-		<a href="{{ url('admin/gallery/create') }}" class="btn btn-lg btn-success pull-right">
+		<a href="{{ url('admin/gallery/create') }}" style="margin-left: 10px" class="btn btn-lg btn-success pull-right">
 			Create new album
 		</a>
+
+		{!! Form::open([ 'url' => 'admin/menu/create']) !!}
+
+			{!! Form::hidden('display_name', 'Gallery') !!}
+			{!! Form::hidden('route', 'gallery') !!}
+			{!! Form::hidden('params', json_encode([])) !!}
+
+			{!! Form::submit('Add to menu', [ 'class' => 'pull-right btn btn-lg btn-warning']) !!}
+
+		{!! Form::close() !!}
 
 		<div class="clearfix"></div>
 
@@ -24,6 +34,7 @@
 				<th></th>
 				<th>up</th>
 				<th>down</th>
+				<th></th>
 			</thead>
 			<tbody>
 				@foreach($albums as $k => $album)
@@ -62,6 +73,21 @@
 
 						{!! Form::close() !!}
 						@endif
+
+					</td>
+					<td>
+
+
+						{!! Form::open([ 'url' => 'admin/menu/create']) !!}
+
+							{!! Form::hidden('display_name', $album->name) !!}
+							{!! Form::hidden('route', 'gallery/{$slug}') !!}
+							{!! Form::hidden('params', json_encode(['slug' => $album->slug])) !!}
+
+							{!! Form::submit('Add to menu', [ 'class' => 'pull-right btn btn-sm btn-warning']) !!}
+
+						{!! Form::close() !!}
+
 
 					</td>
 				</tr>

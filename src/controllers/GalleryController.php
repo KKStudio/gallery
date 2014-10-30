@@ -5,6 +5,23 @@ use Kkstudio\Gallery\Repositories\GalleryRepository;
 
 class GalleryController extends Controller {
 
+	public function index()
+	{
+		$albums = m('Gallery')->albums();
+
+		return v('gallery.index', [ 'albums' => $albums ]);
+	}
+
+	public function show($slug)
+	{
+		$album = m('Gallery')->album($slug);
+		$pictures = $album->pictures;
+
+		return v('gallery.show', [ 'album' => $album, 'pictures' => $pictures ]);
+	}
+
+	// Admin
+
 	public function admin(GalleryRepository $repo) {
 
 		$albums = $repo->albums();

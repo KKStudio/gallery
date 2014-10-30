@@ -20,6 +20,9 @@ class GalleryServiceProvider extends ServiceProvider {
 	{
 		$this->package('kkstudio/gallery');
 
+		\Route::get('gallery', '\Kkstudio\Gallery\Controllers\GalleryController@index');
+		\Route::get('gallery/{slug}', '\Kkstudio\Gallery\Controllers\GalleryController@show');
+
 		\Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 
 			\Route::get('gallery', '\Kkstudio\Gallery\Controllers\GalleryController@admin');
