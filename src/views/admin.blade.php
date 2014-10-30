@@ -6,6 +6,12 @@
 
 	<div class=""> 
 
+		<a href="{{ url('admin/gallery/create') }}" class="btn btn-lg btn-success pull-right">
+			Create new album
+		</a>
+
+		<div class="clearfix"></div>
+
 		<div class="clearfix"></div>
 		@if(count($albums))
 
