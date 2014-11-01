@@ -31,7 +31,7 @@
 			{!! Form::text('name', $album->name, [ 'class' => 'form-control' ]) !!}
 
 			<h3>{!! Form::label('description', 'Album description') !!}</h3>
-			{!! Form::textarea('description', $album->description, [ 'class' => 'form-control', 'rows' => 10 ]) !!}
+			{!! Form::textarea('description', $album->description, [ 'class' => 'editor form-control', 'rows' => 10 ]) !!}
 
 		{!! Form::close() !!}
 
