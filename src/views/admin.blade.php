@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h3 class="pull-left">Albums</h3>
+	<h3 class="pull-left">Albumy</h3>
 
 	<div class=""> 
 
@@ -11,16 +11,16 @@
 		</a>
 
 		<a href="{{ url('admin/gallery/create') }}" style="margin-left: 10px" class="btn btn-lg btn-success pull-right">
-			Create new album
+			Stwórz nowy album
 		</a>
 
 		{!! Form::open([ 'url' => 'admin/menu/create']) !!}
 
-			{!! Form::hidden('display_name', 'Gallery') !!}
+			{!! Form::hidden('display_name', 'Galeria') !!}
 			{!! Form::hidden('route', 'gallery') !!}
 			{!! Form::hidden('params', json_encode([])) !!}
 
-			{!! Form::submit('Add to menu', [ 'class' => 'pull-right btn btn-lg btn-warning']) !!}
+			{!! Form::submit('Dodaj do menu', [ 'class' => 'pull-right btn btn-lg btn-warning']) !!}
 
 		{!! Form::close() !!}
 
@@ -32,12 +32,12 @@
 		<table class="table table-striped">
 			<thead>
 				<th>#</th>
-				<th>Name</th>
+				<th>Nazwa</th>
 				<th></th>
 				<th></th>
 				<th></th>
-				<th>up</th>
-				<th>down</th>
+				<th>wyżej</th>
+				<th>niżej</th>
 				<th></th>
 			</thead>
 			<tbody>
@@ -46,13 +46,13 @@
 					<td>{{ $album->id }}</td>
 					<td>{{ $album->name }}</td>
 					<td>
-						<a href="{{ url('admin/gallery/' . $album->slug . '/pictures') }}" class="btn btn-sm btn-warning">Pictures</a>
+						<a href="{{ url('admin/gallery/' . $album->slug . '/pictures') }}" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-camera"></i> Zdjęcia</a>
 					</td>
 					<td>
-						<a href="{{ url('admin/gallery/' . $album->slug . '/edit') }}" class="btn btn-sm btn-primary">edit</a>
+						<a href="{{ url('admin/gallery/' . $album->slug . '/edit') }}" class="btn btn-sm btn-primary">edytuj</a>
 					</td>
 					<td>
-						<a href="{{ url('admin/gallery/' . $album->id . '/delete') }}" class="btn btn-sm btn-danger">delete</a>
+						<a href="{{ url('admin/gallery/' . $album->id . '/delete') }}" class="btn btn-sm btn-danger">usuń</a>
 					</td>
 					<td>
 						@if($k-1 >= 0)
@@ -61,7 +61,7 @@
 							{!! Form::hidden('id1', $albums[$k-1]->id) !!}
 							{!! Form::hidden('id2', $album->id) !!}
 
-							{!! Form::submit('move up', [ 'class' => 'btn-sm btn btn-success']) !!}
+							{!! Form::submit('w górę', [ 'class' => 'btn-sm btn btn-success']) !!}
 
 						{!! Form::close() !!}
 						@endif
@@ -73,7 +73,7 @@
 							{!! Form::hidden('id1', $album->id) !!}
 							{!! Form::hidden('id2', $albums[$k+1]->id) !!}
 
-							{!! Form::submit('move down', [ 'class' => 'btn-sm btn btn-success']) !!}
+							{!! Form::submit('w dół', [ 'class' => 'btn-sm btn btn-success']) !!}
 
 						{!! Form::close() !!}
 						@endif
@@ -88,7 +88,7 @@
 							{!! Form::hidden('route', 'gallery/{$slug}') !!}
 							{!! Form::hidden('params', json_encode(['slug' => $album->slug])) !!}
 
-							{!! Form::submit('Add to menu', [ 'class' => 'pull-right btn btn-sm btn-warning']) !!}
+							{!! Form::submit('Dodaj do menu', [ 'class' => 'pull-right btn btn-sm btn-warning']) !!}
 
 						{!! Form::close() !!}
 
@@ -99,7 +99,7 @@
 			</tbody>
 		</table>
 		@else
-			<p class="text-muted">No albums found.</p>
+			<p class="text-muted">Brak dodanych albumów.</p>
 		@endif
 
 	</div>

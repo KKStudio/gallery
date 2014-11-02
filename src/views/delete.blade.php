@@ -2,17 +2,17 @@
 
 @section('content')
 
-	<h3 class="pull-left">Delete album</h3>
+	<h3 class="pull-left">Usuń album</h3>
 
 	<div class=""> 
 
 		{!! Form::open([ 'url' => 'admin/gallery/' . $album->id . '/delete']) !!}
 
-			{!! Form::submit('Delete album', [ 'class' => 'btn btn-lg btn-danger pull-right']) !!}
+			{!! Form::submit('Potwierdź usunięcie', [ 'class' => 'btn btn-lg btn-danger pull-right']) !!}
 
 			<div class="clearfix"></div>
 
-			<p>Confirm deleting album <b>{{ $album->name }}</b> by clicking the button above.</p>
+			<p>Potwierdź usunięcie albumu <b>{{ $album->name }}</b> klikając w przycisk powyżej.</p>
 
 		{!! Form::close() !!}
 

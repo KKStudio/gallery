@@ -39,7 +39,7 @@ class GalleryController extends Controller {
 	{
 		if(! \Request::get('name')) {
 
-			\Flash::error('Please provide a name.');
+			\Flash::error('Musisz podać nazwę albumu.');
 
 			return \Redirect::back()->withInput();
 
@@ -54,7 +54,7 @@ class GalleryController extends Controller {
 
 		if($exists) {
 
-			\Flash::error('Album with that name already exists.');
+			\Flash::error('Album z tą nazwą już istnieje.');
 
 			return \Redirect::back()->withInput();
 
@@ -80,7 +80,7 @@ class GalleryController extends Controller {
 
 		$album = $repo->albumCreate($slug, $name, $description, $image, $lp);
 
-		\Flash::success('Album created successfully.');
+		\Flash::success('Pomyślnie stworzono album.');
 
 		return \Redirect::to('admin/gallery');
 
@@ -99,7 +99,7 @@ class GalleryController extends Controller {
 
 		if(! \Request::get('name')) {
 
-			\Flash::error('Please provide a name.');
+			\Flash::error('Musisz podać nazwę.');
 
 			return \Redirect::back()->withInput();
 
@@ -113,7 +113,7 @@ class GalleryController extends Controller {
 
 		if($exists && $exists->id != $album->id) {
 
-			\Flash::error('Album with that name already exists.');
+			\Flash::error('Album z tą nazwą już istnieje.');
 
 			return \Redirect::back()->withInput();
 
@@ -141,7 +141,7 @@ class GalleryController extends Controller {
 
 		$album->save();	
 
-		\Flash::success('Album edited successfully.');
+		\Flash::success('Pomyślnie edytowano album.');
 
 		return \Redirect::to('admin/gallery/'.$slug.'/edit');
 
@@ -159,7 +159,7 @@ class GalleryController extends Controller {
 		$item = $repo->albumById($id);
 		$item->delete();
 
-		\Flash::success('Album deleted.');
+		\Flash::success('Album usunięty.');
 
 		return \Redirect::to('admin/gallery');
 	}
@@ -174,7 +174,7 @@ class GalleryController extends Controller {
 
 		$first->moveAfter($second);
 
-		\Flash::success('Sorted.');
+		\Flash::success('Posortowano.');
 
 		return \Redirect::back();
 
@@ -213,7 +213,7 @@ class GalleryController extends Controller {
 
 	    }
 
-		\Flash::success('Images added.');
+		\Flash::success('Dodano zdjęcia.');
 
 		return \Redirect::back();
 		
@@ -227,7 +227,7 @@ class GalleryController extends Controller {
 		$picture = $repo->picture($id);
 		$picture->delete();
 
-		\Flash::success('Image removed.');
+		\Flash::success('Zdjęcie usunięte.');
 
 		return \Redirect::back();
 		
@@ -244,7 +244,7 @@ class GalleryController extends Controller {
 
 		$first->moveAfter($second);
 
-		\Flash::success('Sorted.');
+		\Flash::success('Posortowano.');
 
 		return \Redirect::back();
 
