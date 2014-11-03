@@ -5,6 +5,13 @@ use Kkstudio\Gallery\Repositories\GalleryRepository;
 
 class GalleryController extends Controller {
 
+	protected $repo;
+
+	public function __construct(GalleryRepository $repo)
+	{
+		$this->repo = $repo;
+	}
+
 	public function index()
 	{
 		$albums = m('Gallery')->albums();
@@ -22,9 +29,9 @@ class GalleryController extends Controller {
 
 	// Admin
 
-	public function admin(GalleryRepository $repo) {
+	public function admin() {
 
-		$albums = $repo->albums();
+		$albums = $this->repo->albums();
 
 		return \View::make('gallery::admin')->with('albums', $albums);
 
@@ -35,7 +42,7 @@ class GalleryController extends Controller {
 		return \View::make('gallery::create');
 	}
 
-	public function postCreate(GalleryRepository $repo) 
+	public function postCreate() 
 	{
 		if(! \Request::get('name')) {
 
@@ -50,7 +57,7 @@ class GalleryController extends Controller {
 		$description = \Request::get('description');
 		$image = '';
 
-		$exists = $repo->album($slug);
+		$exists = $this->repo->album($slug);
 
 		if($exists) {
 
@@ -76,9 +83,9 @@ class GalleryController extends Controller {
 
 		}
 
-		$lp = $repo->albumMax() + 1;
+		$lp = $this->repo->albumMax() + 1;
 
-		$album = $repo->albumCreate($slug, $name, $description, $image, $lp);
+		$album = $this->repo->albumCreate($slug, $name, $description, $image, $lp);
 
 		\Flash::success('Pomyślnie stworzono album.');
 
@@ -86,16 +93,16 @@ class GalleryController extends Controller {
 
 	}
 
-	public function edit($slug, GalleryRepository $repo) 
+	public function edit($slug) 
 	{
-		$album = $repo->album($slug);
+		$album = $this->repo->album($slug);
 
 		return \View::make('gallery::edit')->with('album', $album);
 	}
 
-	public function postEdit($slug, GalleryRepository $repo) 
+	public function postEdit($slug) 
 	{
-		$album = $repo->album($slug);
+		$album = $this->repo->album($slug);
 
 		if(! \Request::get('name')) {
 
@@ -109,7 +116,7 @@ class GalleryController extends Controller {
 		$slug = \Str::slug($name);
 		$description = \Request::get('description');
 
-		$exists = $repo->album($slug);
+		$exists = $this->repo->album($slug);
 
 		if($exists && $exists->id != $album->id) {
 
@@ -147,14 +154,14 @@ class GalleryController extends Controller {
 
 	}
 
-	public function delete($id, GalleryRepository $repo) 
+	public function delete($id) 
 	{
-		$item = $repo->albumById($id);
+		$item = $this->repo->albumById($id);
 
 		return \View::make('gallery::delete')->with('album', $item);
 	}
 
-	public function postDelete($id, GalleryRepository $repo) 
+	public function postDelete($id) 
 	{
 		$item = $repo->albumById($id);
 		$item->delete();
@@ -164,13 +171,13 @@ class GalleryController extends Controller {
 		return \Redirect::to('admin/gallery');
 	}
 
-	public function swap(GalleryRepository $repo) {
+	public function swap() {
 
 		$id1 = \Request::get('id1');
 		$id2 = \Request::get('id2');
 
-		$first = $repo->albumById($id1);
-		$second = $repo->albumById($id2);
+		$first = $this->repo->albumById($id1);
+		$second = $this->repo->albumById($id2);
 
 		$first->moveAfter($second);
 
@@ -180,19 +187,19 @@ class GalleryController extends Controller {
 
 	}
 
-	public function pictures($slug, GalleryRepository $repo)
+	public function pictures($slug)
 	{
 
-		$album = $repo->album($slug);
+		$album = $this->repo->album($slug);
 
 		return \View::make('gallery::pictures')->with('album', $album);
 		
 	}
 
-	public function addPicture($slug, GalleryRepository $repo)
+	public function addPicture($slug)
 	{
 
-		$album = $repo->album($slug);
+		$album = $this->repo->album($slug);
 
 		$files = \Input::file('images');
 
@@ -208,8 +215,8 @@ class GalleryController extends Controller {
 
             $image->save(public_path('assets/gallery/thumb_' . $image_name));
 
-            $lp = $repo->pictureMax($album->id) + 1;
-            $repo->addImage($album->id, $image_name, $lp);
+            $lp = $this->repo->pictureMax($album->id) + 1;
+            $this->repo->addImage($album->id, $image_name, $lp);
 
 	    }
 
@@ -219,12 +226,12 @@ class GalleryController extends Controller {
 		
 	}
 
-	public function deletePicture($slug, GalleryRepository $repo)
+	public function deletePicture($slug)
 	{
 
 		$id = \Request::get('picture_id');
 
-		$picture = $repo->picture($id);
+		$picture = $this->repo->picture($id);
 		$picture->delete();
 
 		\Flash::success('Zdjęcie usunięte.');
@@ -233,14 +240,14 @@ class GalleryController extends Controller {
 		
 	}
 
-	public function swapPictures($slug, GalleryRepository $repo)
+	public function swapPictures($slug)
 	{
 
 		$id1 = \Request::get('id1');
 		$id2 = \Request::get('id2');
 
-		$first = $repo->picture($id1);
-		$second = $repo->picture($id2);
+		$first = $this->repo->picture($id1);
+		$second = $this->repo->picture($id2);
 
 		$first->moveAfter($second);
 
