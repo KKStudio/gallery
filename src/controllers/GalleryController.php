@@ -1,3 +1,4 @@
+
 <?php namespace Kkstudio\Gallery\Controllers;
 
 use Illuminate\Routing\Controller;
@@ -9,6 +10,7 @@ class GalleryController extends Controller {
 
 	public function __construct(GalleryRepository $repo)
 	{
+		if(! m('Gallery')->enabled()) return \App::abort('404');
 		$this->repo = $repo;
 	}
 
