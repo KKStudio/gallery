@@ -1,4 +1,3 @@
-
 <?php namespace Kkstudio\Gallery\Controllers;
 
 use Illuminate\Routing\Controller;
